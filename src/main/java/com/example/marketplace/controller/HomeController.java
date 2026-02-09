@@ -5,8 +5,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    @ResponseBody
     public String home() {
-        return "Server is running!";
+        return "Home";
     }
+
+    @GetMapping("/")
+    public String prodDetails() {
+        return "ProductDetails";
+    }
+
 }
