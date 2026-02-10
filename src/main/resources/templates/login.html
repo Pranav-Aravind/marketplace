@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
+
+
 <body>
-<h1>Login</h1>
-<label for="email">Email:</label>
-<input type="text" id="email" name="email">
-<label for="password">Password:</label>
-<input type="password" id="password" name="password">
-<p>Dont have an account? <a href="/register">Sign up</a></p>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <button type="submit">Sign in</button>
+
+        <p>Don't have an account? <a href="/register">Sign up</a></p>
+    </form>
 </body>
 </html>
