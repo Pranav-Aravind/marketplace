@@ -13,15 +13,14 @@ public class Product {
     private int price;
     private String img;
 
-    public Product() {
-    }
+    private int caseSize;
+    private String type;
+    private int width;
+    private String material;
 
-    public Product(String name, int price, String img) {
-        this.name = name;
-        this.price = price;
-        this.img = img;
-    }
+    private String description;
 
+    // ID
     public int getId() {
         return id;
     }
@@ -30,6 +29,7 @@ public class Product {
         this.id = id;
     }
 
+    // Name
     public String getName() {
         return name;
     }
@@ -38,6 +38,7 @@ public class Product {
         this.name = name;
     }
 
+    // Price
     public int getPrice() {
         return price;
     }
@@ -46,11 +47,57 @@ public class Product {
         this.price = price;
     }
 
+    // Image
     public String getImg() {
         return img;
     }
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    // Case Size
+    public int getCaseSize() {
+        return caseSize;
+    }
+
+    public void setCaseSize(int caseSize) {
+        this.caseSize = caseSize;
+    }
+
+    // Type
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // Width
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    // Material
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    // Description
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
