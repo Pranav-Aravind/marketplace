@@ -6,5 +6,27 @@
 </head>
 <body>
 
+
+    <nav>
+        <button>Filter</button>
+        <a href="/orders"><button>Orders</button></a>
+        <a href="/cart"><button>Cart</button></a>
+        <a href="/login"><button>Login</button></a>
+    </nav>
+
+
+    <h2 th:text="${product.name}">Product Name</h2>
+
+    <img th:src="${product.img}" width="200">
+
+    <p>Price: $<span th:text="${product.price}"></span></p>
+    <p>Case Size: <span th:text="${product.caseSize}"></span> mm</p>
+    <p>Type: <span th:text="${product.type}"></span></p>
+    <p>Width: <span th:text="${product.width}"></span> mm</p>
+    <p>Material: <span th:text="${product.material}"></span></p>
+    <p>Description: <span th:text="${product.description}"></span></p>
+
+    <a href="/products">Back to Products</a>
+
 </body>
 </html>
