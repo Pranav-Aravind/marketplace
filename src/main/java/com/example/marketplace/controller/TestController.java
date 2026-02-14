@@ -11,8 +11,6 @@ public class TestController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/test")
     public String testDatabase() {
