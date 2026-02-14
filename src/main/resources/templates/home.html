@@ -13,35 +13,27 @@
     </nav>
 
 
-    <h1>Marketplace Products</h1>
-
-
-    <div>
-        <img src="https://m.media-amazon.com/images/I/71Tg6yQIDaL._AC_SX679_.jpg" alt="Product 1" width="150" height="200">
-        <h3>Product 1</h3>
-        <p>$100</p>
-        <a href="/productdetails"><button>View Product</button></a>
-    </div>
-    <hr>
-
+    <h2>Products</h2>
 
     <div>
-        <img src="https://m.media-amazon.com/images/I/71SyDkxOOFL._AC_SX679_.jpg" alt="Product 2" width="150" height="200">
-        <h3>Product 2</h3>
-        <p>$90</p>
-        <a href="/productdetails"><button>View Product</button></a>
+
+        <div th:each="product : ${products}"
+             style="border:1px solid black; width:200px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+
+            <img th:src="${product.img}" width="150" height="180"><br><br>
+
+            <b th:text="${product.name}">Product Name</b><br>
+
+            $<span th:text="${product.price}">0</span>
+
+            <a th:href="@{/productdetails/{id}(id=${product.id})}">
+                <button>View Product</button>
+            </a>
+
+        </div>
+
     </div>
-    <hr>
 
-
-
-    <div>
-        <img src="https://m.media-amazon.com/images/I/71nYFuDIWnL._AC_SX679_.jpg" alt="Product 3" width="150" height="200">
-        <h3>Product 3</h3>
-        <p>$115</p>
-        <a href="/productdetails"><button>View Product</button></a>
-    </div>
-    <hr>
 
 </body>
 </html>

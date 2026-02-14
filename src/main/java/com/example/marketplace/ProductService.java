@@ -12,7 +12,6 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-
     @Transactional
     public void addProduct(Product prod) {
         productRepository.save(prod);
