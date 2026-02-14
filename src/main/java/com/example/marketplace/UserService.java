@@ -16,10 +16,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-//    @Transactional
-//    public Product findProduct(@PathVariable int id) {
-//        return productRepository.findById(id).get();
-//    }
 
     @Transactional
     public void wipe() {

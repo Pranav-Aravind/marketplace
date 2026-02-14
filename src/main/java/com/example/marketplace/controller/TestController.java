@@ -11,6 +11,8 @@ public class TestController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/test")
     public String testDatabase() {
@@ -50,6 +52,8 @@ public class TestController {
         productService.addProduct(product);
         productService.addProduct(product1);
         productService.addProduct(product2);
+
+        userService.wipe();
 
         return "test";
     }

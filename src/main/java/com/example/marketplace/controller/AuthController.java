@@ -1,37 +1,78 @@
 package com.example.marketplace.controller;
 import com.example.marketplace.UserService;
 import com.example.marketplace.model.User;
+import com.example.marketplace.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+class AppConfig {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
 
 @Controller
 public class AuthController {
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/register")
     public String showRegister() {
         return "register";
     }
 
-    public String registerUser(@RequestParam String username,
-                               @RequestParam String password) {
+    @PostMapping("/register")
+    public String register(@RequestParam String username,
+                           @RequestParam String password) {
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+
+        String encoded = passwordEncoder.encode(password);
+        user.setPassword(encoded);
+
         user.setAdmin(false);
 
         userService.addUser(user);
 
         return "redirect:/login";
+    }
+
+
+    @GetMapping("/login")
+    public String showLogin() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        HttpServletRequest request) {
+
+        User user = userRepository.findByUsername(username);
+
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
+            return "redirect:/login?error";
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+
+        return "redirect:/";
     }
 }

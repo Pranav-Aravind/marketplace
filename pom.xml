@@ -67,6 +67,12 @@
             <artifactId>spring-session-jdbc</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>6.2.0</version> <!-- use latest compatible version -->
+        </dependency>
+
     </dependencies>
 
     <build>
