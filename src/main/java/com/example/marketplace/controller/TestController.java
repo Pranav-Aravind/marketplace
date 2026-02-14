@@ -1,5 +1,6 @@
 package com.example.marketplace.controller;
 import com.example.marketplace.ProductService;
+import com.example.marketplace.UserService;
 import com.example.marketplace.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,14 @@ public class TestController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/test")
     public String testDatabase() {
 
         Product product = new Product();
-        product.setName("Test Watch");
+        product.setName("Fossil X12");
         product.setPrice(100);
         product.setImg("https://m.media-amazon.com/images/I/71Tg6yQIDaL._AC_SX679_.jpg");
         product.setCaseSize(42);
@@ -25,7 +28,7 @@ public class TestController {
         product.setDescription("A stylish analog watch with stainless steel strap.");
 
         Product product1 = new Product();
-        product1.setName("Best Watch");
+        product1.setName("Fossil A8");
         product1.setPrice(100);
         product1.setImg("https://m.media-amazon.com/images/I/71SyDkxOOFL._AC_SX679_.jpg");
         product1.setCaseSize(40);
@@ -35,7 +38,7 @@ public class TestController {
         product1.setDescription("Modern digital watch with premium leather strap.");
 
         Product product2 = new Product();
-        product2.setName("Over Watch");
+        product2.setName("Fossil G13");
         product2.setPrice(100);
         product2.setImg("https://m.media-amazon.com/images/I/71nYFuDIWnL._AC_SX679_.jpg");
         product2.setCaseSize(44);
@@ -49,8 +52,7 @@ public class TestController {
         productService.addProduct(product);
         productService.addProduct(product1);
         productService.addProduct(product2);
-    // Create a Product
-    // Use the repository method save() to persist it in the database
+
         return "test";
     }
 }
