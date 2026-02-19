@@ -26,6 +26,13 @@
     <p>Material: <span th:text="${product.material}"></span></p>
     <p>Description: <span th:text="${product.description}"></span></p>
 
+    <form th:action="@{/cart}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}">
+        <button type="submit">Add to cart</button>
+    </form>
+
+
+
     <a href="/">Back to Products</a>
 
 </body>

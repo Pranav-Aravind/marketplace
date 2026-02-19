@@ -15,8 +15,6 @@ public class User {
 
     private boolean admin;
 
-
-
     public int getId() {
         return id;
     }
