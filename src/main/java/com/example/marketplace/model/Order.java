@@ -1,21 +1,23 @@
 package com.example.marketplace.model;
 
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "orders")
 public class Order {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     private int quantity;

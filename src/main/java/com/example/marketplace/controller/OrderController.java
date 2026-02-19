@@ -32,6 +32,7 @@ public class OrderController {
             user = (User) session.getAttribute("user");
         }
 
+        model.addAttribute("user", user);
         model.addAttribute("cart", orderRepository.findAll());
 
         return "cart";
@@ -43,6 +44,11 @@ public class OrderController {
                        HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
+
+        if (session == null) {
+            return "redirect:/login";
+        }
+
         User user = (User) session.getAttribute("user");
 
         if (user == null) {

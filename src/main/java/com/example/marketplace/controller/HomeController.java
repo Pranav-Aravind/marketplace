@@ -26,7 +26,7 @@ public class HomeController {
         if (session != null) {
             user = (User) session.getAttribute("user");
         }
-
+        model.addAttribute("user", user);
         model.addAttribute("products", productRepository.findAll());
 
         return "home";
@@ -41,6 +41,7 @@ public class HomeController {
             user = (User) session.getAttribute("user");
         }
 
+        model.addAttribute("user", user);
         Product product = productService.findProduct(id);
 
         model.addAttribute("product", product);

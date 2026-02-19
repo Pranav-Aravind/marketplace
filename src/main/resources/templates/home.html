@@ -12,6 +12,14 @@
         <a href="/login"><button>Login</button></a>
     </nav>
 
+    <div th:if="${user != null}">
+        <h3>Hello <span th:text="${user.username}"></span> 👋</h3>
+    </div>
+
+    <div th:if="${user == null}">
+        <a th:href="@{/login}">Login</a>
+    </div>
+
     <h2>Products</h2>
 
     <div>
@@ -32,7 +40,6 @@
         </div>
 
     </div>
-
 
 </body>
 </html>
