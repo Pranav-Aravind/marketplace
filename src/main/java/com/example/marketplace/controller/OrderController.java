@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class OrderController {
 
@@ -27,13 +29,17 @@ public class OrderController {
     public String cart(HttpServletRequest request, org.springframework.ui.Model model) {
 
         HttpSession session = request.getSession(false);
-        User user = null;
-        if (session != null) {
-            user = (User) session.getAttribute("user");
+
+        if (session == null || session.getAttribute("user") == null) {
+            return "redirect:/login";
         }
 
+        User user = (User) session.getAttribute("user");
+
+        List<Order> cartItems = orderRepository.findByUserAndStatus(user, "cart");
+
         model.addAttribute("user", user);
-        model.addAttribute("cart", orderRepository.findAll());
+        model.addAttribute("cartItems", cartItems);
 
         return "cart";
     }
