@@ -7,7 +7,7 @@
 <body>
     <nav>
         <button>Filter</button>
-        <a href="/orders"><button>Orders</button></a>
+        <a href="/orderhistory"><button>Orders</button></a>
         <a href="/cart"><button>Cart</button></a>
         <a href="/login"><button>Login</button></a>
     </nav>
@@ -16,9 +16,6 @@
         <h3>Hello <span th:text="${user.username}"></span> 👋</h3>
     </div>
 
-    <div th:if="${user == null}">
-        <a th:href="@{/login}">Login</a>
-    </div>
 
     <h2>Products</h2>
 

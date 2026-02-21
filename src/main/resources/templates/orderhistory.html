@@ -5,6 +5,23 @@
     <title>Order History</title>
 </head>
 <body>
+<h2>Order History</h2>
 
+<div th:if="${#lists.isEmpty(orderedItems)}">
+    <p>Your order history is empty.</p>
+</div>
+
+<div th:each="order : ${orderedItems}"
+     style="border:1px solid black; width:250px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+
+    <img th:src="${order.product.img}" width="150" height="180"><br><br>
+
+    <b th:text="${order.product.name}">Product Name</b><br>
+
+    Quantity: <span th:text="${order.quantity}"></span><br>
+
+    Price: $<span th:text="${order.product.price}"></span><br>
+
+</div>
 </body>
 </html>

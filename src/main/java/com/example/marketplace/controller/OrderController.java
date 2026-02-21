@@ -79,7 +79,48 @@ public class OrderController {
 
 
     @GetMapping("/orderhistory")
-    public String orderHistory() {
+    public String orderhistory(HttpServletRequest request, org.springframework.ui.Model model) {
+        HttpSession session = request.getSession(false);
+
+        if (session == null || session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
+        User user = (User) session.getAttribute("user");
+
+        List<Order> orderedItems = orderRepository.findByUserAndStatus(user, "placed");
+
+        model.addAttribute("user", user);
+        model.addAttribute("orderedItems", orderedItems);
+
         return "orderhistory";
     }
+
+    @PostMapping("/orderhistory")
+    public String orderhistory(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+
+        if (session == null) {
+            return "redirect:/login";
+        }
+
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        List<Order> cartItems = orderRepository.findByUserAndStatus(user, "cart");
+
+        for(Order item: cartItems) {
+            item.setStatus("placed");
+            orderRepository.save(item);
+        }
+
+        return "redirect:/orderhistory";
+    }
+
+
+
 }

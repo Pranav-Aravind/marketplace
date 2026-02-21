@@ -29,6 +29,11 @@
 
     Price: $<span th:text="${order.product.price}"></span><br>
 
+    <form th:action="@{/orderhistory}" method="post">
+        <input type="hidden">
+        <button type="submit">Place order</button>
+    </form>
+
 </div>
 
 </body>
