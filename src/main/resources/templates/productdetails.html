@@ -5,16 +5,6 @@
     <title>Product Details</title>
 </head>
 <body>
-
-
-    <nav>
-        <button>Filter</button>
-        <a href="/orderhistory"><button>Orders</button></a>
-        <a href="/cart"><button>Cart</button></a>
-        <a href="/login"><button>Login</button></a>
-    </nav>
-
-
     <h2 th:text="${product.name}">Product Name</h2>
 
     <img th:src="${product.img}" width="200">
@@ -30,8 +20,6 @@
         <input type="hidden" name="productId" th:value="${product.id}">
         <button type="submit">Add to cart</button>
     </form>
-
-
 
     <a href="/">Back to Products</a>
 

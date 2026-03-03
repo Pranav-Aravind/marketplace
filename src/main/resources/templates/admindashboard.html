@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+</head>
+<body>
+<nav>
+  <a href="/admin/customerorders"><button>Orders</button></a>
+  <a href="/admin/products/new"><button>Add product</button></a>
+  <a href="/login"><button>Login</button></a>
+</nav>
+
+<div th:if="${user != null}">
+  <h3>Hello Admin <span th:text="${user.username}"></span> 👋</h3>
+</div>
+
+
+<h2>Products</h2>
+
+<div>
+
+  <div th:each="product : ${products}"
+       style="border:1px solid black; width:200px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+
+    <img th:src="${product.img}" width="150" height="180"><br><br>
+
+    <b th:text="${product.name}">Product Name</b><br>
+
+    $<span th:text="${product.price}">0</span>
+
+    <a th:href="@{/productdetails/{id}(id=${product.id})}">
+      <button>View Product</button>
+    </a>
+
+  </div>
+
+</div>
+
+</body>
+</html>
+

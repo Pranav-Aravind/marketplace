@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Orders</title>
+</head>
+<body>
+<h2>Customer Orders</h2>
+
+<div th:if="${#lists.isEmpty(orderedItems)}">
+    <p>Customer orders is empty.</p>
+</div>
+
+<div th:each="order : ${orderedItems}"
+     style="border:1px solid black; width:250px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+
+    <img th:src="${order.product.img}" width="150" height="180"><br><br>
+
+    <b th:text="${order.product.name}">Product Name</b><br>
+
+    Quantity: <span th:text="${order.quantity}"></span><br>
+
+    Price: $<span th:text="${order.price}"></span><br>
+
+    <b th:text="${order.user.username}">Username</b><br>
+
+    Current Status:
+    <span th:text="${order.status}"></span><br><br>
+
+    <form th:action="@{/admin/customerorders/updateStatus}" method="post">
+        <input type="hidden" name="orderId" th:value="${order.id}" />
+
+        <select name="status">
+            <option value="placed">PLACED</option>
+            <option value="dispatched">DISPATCHED</option>
+            <option value="delivered">DELIVERED</option>
+        </select>
+
+        <button type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>

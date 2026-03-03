@@ -70,6 +70,9 @@ public class AuthController {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
 
+        if(user.isAdmin()) {
+            return "redirect:/admin/products";
+        }
         return "redirect:/";
     }
 }

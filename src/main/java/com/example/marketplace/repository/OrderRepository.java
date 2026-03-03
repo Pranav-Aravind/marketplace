@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByUserAndStatus(User user, String status);
-    List<Order> findByStatus(String status);
+    List<Order> findByStatusNot(String status);
 }
