@@ -20,7 +20,11 @@
 
     Quantity: <span th:text="${order.quantity}"></span><br>
 
-    Price: $<span th:text="${order.product.price}"></span><br>
+    Price: $<span th:text="${order.price}"></span><br>
+
+    <div th:if="${#isAdmin}">
+        <b th:text="${order.user.username}">Username</b><br>
+    </div>
 
 </div>
 </body>

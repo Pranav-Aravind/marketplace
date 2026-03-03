@@ -5,22 +5,12 @@ import com.example.marketplace.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-@Configuration
-class AppConfig {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-}
 
 @Controller
 public class AuthController {
@@ -31,14 +21,21 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
+
     @GetMapping("/register")
-    public String showRegister() {
+    public String showRegister(@RequestParam(required = false) Boolean admin,
+                               Model model) {
+
+        boolean isAdmin = admin != null && admin;
+        model.addAttribute("isAdmin", isAdmin);
+
         return "register";
     }
 
     @PostMapping("/register")
     public String register(@RequestParam String username,
-                           @RequestParam String password) {
+                           @RequestParam String password,
+                           @RequestParam(required = false) Boolean admin) {
 
         User user = new User();
         user.setUsername(username);
@@ -46,7 +43,7 @@ public class AuthController {
         String encoded = passwordEncoder.encode(password);
         user.setPassword(encoded);
 
-        user.setAdmin(false);
+        user.setAdmin(admin != null && admin);
 
         userService.addUser(user);
 

@@ -27,7 +27,7 @@
 
     Quantity: <span th:text="${order.quantity}"></span><br>
 
-    Price: $<span th:text="${order.product.price}"></span><br>
+    Price: $<span th:text="${order.price}"></span><br>
 
     <form th:action="@{/orderhistory}" method="post">
         <input type="hidden">

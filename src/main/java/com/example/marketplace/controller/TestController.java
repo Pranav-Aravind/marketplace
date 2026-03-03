@@ -1,4 +1,5 @@
 package com.example.marketplace.controller;
+import com.example.marketplace.OrderService;
 import com.example.marketplace.ProductService;
 import com.example.marketplace.UserService;
 import com.example.marketplace.model.Product;
@@ -13,6 +14,8 @@ public class TestController {
     private ProductService productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/test")
     public String testDatabase() {
@@ -54,6 +57,7 @@ public class TestController {
         productService.addProduct(product2);
 
         userService.wipe();
+        orderService.wipe();
 
         return "test";
     }

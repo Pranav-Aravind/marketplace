@@ -22,6 +22,7 @@ public class Order {
 
     private int quantity;
     private String status;
+    private int price;
 
     public int getId() {
         return id;
@@ -53,6 +54,14 @@ public class Order {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getStatus() {

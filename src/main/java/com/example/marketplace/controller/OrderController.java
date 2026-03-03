@@ -71,6 +71,7 @@ public class OrderController {
         order.setProduct(product);
         order.setQuantity(1);
         order.setStatus("cart");
+        order.setPrice(product.getPrice());
 
         orderService.addOrder(order);
 
@@ -81,6 +82,7 @@ public class OrderController {
     @GetMapping("/orderhistory")
     public String orderhistory(HttpServletRequest request, org.springframework.ui.Model model) {
         HttpSession session = request.getSession(false);
+        boolean isAdmin = false;
 
         if (session == null || session.getAttribute("user") == null) {
             return "redirect:/login";
@@ -90,7 +92,13 @@ public class OrderController {
 
         List<Order> orderedItems = orderRepository.findByUserAndStatus(user, "placed");
 
+        if(user.isAdmin()) {
+            orderedItems = orderRepository.findByStatus("placed");
+        }
+
         model.addAttribute("user", user);
+        isAdmin = user.isAdmin();
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("orderedItems", orderedItems);
 
         return "orderhistory";
