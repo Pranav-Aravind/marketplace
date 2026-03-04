@@ -3,34 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    nav {
+      margin-bottom: 20px;
+    }
+
+    nav a button {
+      padding: 6px 12px;
+      margin-right: 5px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    nav a button:hover {
+      background-color: #555;
+    }
+
+    .product-card {
+      border: 1px solid #ccc;
+      width: 200px;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .btn {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
+
 <nav>
   <a href="/admin/customerorders"><button>Orders</button></a>
-  <a href="/admin/products/new"><button>Add product</button></a>
+  <a href="/admin/products/new"><button>Add Product</button></a>
   <a href="/login"><button>Login</button></a>
 </nav>
 
 <div th:if="${user != null}">
-  <h3>Hello Admin <span th:text="${user.username}"></span> 👋</h3>
+  <h3>Hello Admin <span th:text="${user.username}"></span></h3>
 </div>
-
 
 <h2>Products</h2>
 
 <div>
 
-  <div th:each="product : ${products}"
-       style="border:1px solid black; width:200px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+  <div th:each="product : ${products}" class="product-card">
 
     <img th:src="${product.img}" width="150" height="180"><br><br>
 
     <b th:text="${product.name}">Product Name</b><br>
 
-    $<span th:text="${product.price}">0</span>
+    $<span th:text="${product.price}">0</span><br><br>
 
-    <a th:href="@{/productdetails/{id}(id=${product.id})}">
-      <button>View Product</button>
+    <a th:href="@{/admin/editproduct/{id}(id=${product.id})}">
+      <button class="btn">Edit Product</button>
     </a>
 
   </div>
@@ -39,4 +82,3 @@
 
 </body>
 </html>
-

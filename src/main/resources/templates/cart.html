@@ -3,13 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .cart-card {
+            border: 1px solid #ccc;
+            width: 250px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .cart-card img {
+            margin-bottom: 10px;
+        }
+
+        .cart-card p {
+            margin: 5px 0;
+        }
+
+        button {
+            margin-top: 8px;
+            padding: 6px 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cart</title>
-</head>
+
 <body>
 
 <h2>Your Cart</h2>
@@ -18,24 +55,20 @@
     <p>Your cart is empty.</p>
 </div>
 
-<div th:each="order : ${cartItems}"
-     style="border:1px solid black; width:250px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+<div th:each="order : ${cartItems}" class="cart-card">
 
-    <img th:src="${order.product.img}" width="150" height="180"><br><br>
+    <img th:src="${order.product.img}" width="150" height="180"><br>
 
     <b th:text="${order.product.name}">Product Name</b><br>
 
-    Quantity: <span th:text="${order.quantity}"></span><br>
-
-    Price: $<span th:text="${order.price}"></span><br>
+    <p>Quantity: <span th:text="${order.quantity}"></span></p>
+    <p>Price: $<span th:text="${order.price}"></span></p>
 
     <form th:action="@{/orderhistory}" method="post">
-        <input type="hidden">
-        <button type="submit">Place order</button>
+        <button type="submit">Place Order</button>
     </form>
 
 </div>
 
 </body>
-</html>
 </html>

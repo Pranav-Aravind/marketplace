@@ -1,12 +1,14 @@
 package com.example.marketplace.controller;
 import com.example.marketplace.ProductService;
 import com.example.marketplace.model.Order;
+import com.example.marketplace.model.Product;
 import com.example.marketplace.model.User;
 import com.example.marketplace.repository.OrderRepository;
 import com.example.marketplace.repository.ProductRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,15 +23,20 @@ public class AdminController {
     private ProductRepository productRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/admin/products")
-    public String admindashboard(HttpServletRequest request, org.springframework.ui.Model model) {
+    public String adminDashboard(HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession(false);
-        User user = null;
-        if (session != null) {
-            user = (User) session.getAttribute("user");
+
+        if (session == null || session.getAttribute("user") == null) {
+            return "redirect:/login";
         }
+
+        User user = (User) session.getAttribute("user");
+
         if (!user.isAdmin()) {
             return "redirect:/";
         }
@@ -40,21 +47,29 @@ public class AdminController {
         return "admindashboard";
     }
 
-    @GetMapping("/admin/products/new")
-    public String addProduct(HttpServletRequest request, org.springframework.ui.Model model) {
+    @GetMapping("/admin/editproduct/{id}")
+    public String editProduct(HttpServletRequest request,
+                              @PathVariable int id,
+                              Model model) {
 
         HttpSession session = request.getSession(false);
-        User user = null;
-        if (session != null) {
-            user = (User) session.getAttribute("user");
+
+        if (session == null || session.getAttribute("user") == null) {
+            return "redirect:/login";
         }
+
+        User user = (User) session.getAttribute("user");
+
         if (!user.isAdmin()) {
             return "redirect:/";
         }
 
-        model.addAttribute("user", user);
+        Product product = productService.findProduct(id);
 
-        return "createproduct";
+        model.addAttribute("user", user);
+        model.addAttribute("product", product);
+
+        return "productform";
     }
 
     @GetMapping("/admin/customerorders")

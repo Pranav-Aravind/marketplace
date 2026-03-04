@@ -3,40 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>MarketPlace</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a button {
+            padding: 6px 12px;
+            margin-right: 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav a button:hover {
+            background-color: #555;
+        }
+
+        .btn {
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .product-card {
+            border: 1px solid #ccc;
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <a href="/orderhistory"><button>Orders</button></a>
-        <a href="/cart"><button>Cart</button></a>
-        <a href="/login"><button>Login</button></a>
-    </nav>
 
-    <div th:if="${user != null}">
-        <h3>Hello <span th:text="${user.username}"></span> 👋</h3>
-    </div>
+<nav>
+    <a href="/"><button>Home</button></a>
+    <a href="/cart"><button>Cart</button></a>
+    <a href="/orderhistory"><button>Order History</button></a>
+    <a href="/login"><button>Login</button></a>
+</nav>
 
+<div th:if="${user != null}">
+    <h3>Hello <span th:text="${user.username}"></span></h3>
+</div>
 
-    <h2>Products</h2>
+<h2>Products</h2>
 
-    <div>
+<div>
 
-        <div th:each="product : ${products}"
-             style="border:1px solid black; width:200px; padding:10px; margin:10px; display:inline-block; text-align:center;">
+    <div th:each="product : ${products}" class="product-card">
 
-            <img th:src="${product.img}" width="150" height="180"><br><br>
+        <img th:src="${product.img}" width="150" height="180"><br><br>
 
-            <b th:text="${product.name}">Product Name</b><br>
+        <b th:text="${product.name}">Product Name</b><br>
 
-            $<span th:text="${product.price}">0</span>
+        $<span th:text="${product.price}">0</span><br><br>
 
-            <a th:href="@{/productdetails/{id}(id=${product.id})}">
-                <button>View Product</button>
-            </a>
-
-        </div>
+        <a th:href="@{/productdetails/{id}(id=${product.id})}">
+            <button class="btn">View Product</button>
+        </a>
 
     </div>
+
+</div>
 
 </body>
 </html>
-

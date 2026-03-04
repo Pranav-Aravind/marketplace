@@ -1,27 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Product Details</title>
+    <title th:text="${product.name}">Product</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        img {
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2 th:text="${product.name}">Product Name</h2>
 
-    <img th:src="${product.img}" width="200">
+<h2 th:text="${product.name}">Product Name</h2>
 
-    <p>Price: $<span th:text="${product.price}"></span></p>
-    <p>Case Size: <span th:text="${product.caseSize}"></span> mm</p>
-    <p>Type: <span th:text="${product.type}"></span></p>
-    <p>Width: <span th:text="${product.width}"></span> mm</p>
-    <p>Material: <span th:text="${product.material}"></span></p>
-    <p>Description: <span th:text="${product.description}"></span></p>
+<img th:src="${product.img}" width="200">
 
-    <form th:action="@{/cart}" method="post">
-        <input type="hidden" name="productId" th:value="${product.id}">
-        <button type="submit">Add to cart</button>
-    </form>
+<p><strong>Price:</strong> $<span th:text="${product.price}"></span></p>
+<p><strong>Case Size:</strong> <span th:text="${product.caseSize}"></span> mm</p>
+<p><strong>Type:</strong> <span th:text="${product.type}"></span></p>
+<p><strong>Width:</strong> <span th:text="${product.width}"></span> mm</p>
+<p><strong>Material:</strong> <span th:text="${product.material}"></span></p>
+<p><strong>Description:</strong> <span th:text="${product.description}"></span></p>
 
-    <a href="/">Back to Products</a>
+<form th:action="@{/cart}" method="post">
+    <input type="hidden" name="productId" th:value="${product.id}">
+    <button type="submit">Add to cart</button>
+</form>
+
+<a href="/">Back to Products</a>
 
 </body>
 </html>
