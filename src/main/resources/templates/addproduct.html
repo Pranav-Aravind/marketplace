@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Product</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h2 { margin-bottom: 15px; }
+    input { display: block; margin-bottom: 10px; padding: 6px; width: 250px; }
+    button { margin-top: 10px; padding: 6px 12px; background-color: #333; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #555; }
+    a { display: inline-block; margin-top: 15px; text-decoration: none; color: #333; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h2>Add Product</h2>
+
+<form th:action="@{/admin/products/save}" th:object="${product}" method="post">
+
+  Name:
+  <input type="text" th:field="*{name}" required>
+
+  Price:
+  <input type="number" th:field="*{price}" required>
+
+  Case Size:
+  <input type="number" th:field="*{caseSize}" required>
+
+  Type:
+  <input type="text" th:field="*{type}" required>
+
+  Width:
+  <input type="number" th:field="*{width}" required>
+
+  Material:
+  <input type="text" th:field="*{material}" required>
+
+  Image URL:
+  <input type="text" th:field="*{img}" required>
+
+  Description:
+  <input type="text" th:field="*{description}" required>
+
+  <button type="submit">Create</button>
+</form>
+
+<br>
+<a href="/admin/products">Back to Products</a>
+
+</body>
+</html>
