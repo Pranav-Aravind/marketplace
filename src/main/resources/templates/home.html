@@ -73,24 +73,23 @@
 
 <div>
 
-    <form method="get" action="/" style="margin-bottom:20px;">
-        <label>Type:</label>
-        <select name="type">
+    <form method="get" action="/" style="margin-bottom:20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+
+        <label style="margin:0;">Type:</label>
+        <select name="type" style="height:32px;">
             <option value="">All Types</option>
-            <option th:each="t : ${types}"
-                    th:value="${t}"
-                    th:text="${t}"
-                    th:selected="${t == param.type}">
-            </option>
+            <option th:each="t : ${types}" th:value="${t}" th:text="${t}" th:selected="${t == param.type}"></option>
         </select>
 
-        <label>Min Price:</label>
-        <input type="number" name="minPrice" step="10" min="0" th:value="${param.minPrice}" />
+        <label style="margin:0;">Min Price:</label>
+        <input type="number" name="minPrice" step="10" min="0" th:value="${param.minPrice}" style="height:30px;"/>
 
-        <label>Max Price:</label>
-        <input type="number" name="maxPrice" step="10" min="0" th:value="${param.maxPrice}" />
+        <label style="margin:0;">Max Price:</label>
+        <input type="number" name="maxPrice" step="10" min="0" th:value="${param.maxPrice}" style="height:30px;"/>
 
-        <button type="submit" class="filter">Filter</button>
+        <button type="submit" class="filter" style="height:32px;">Filter</button>
+        <button type="button" class="filter" style="height:32px; background-color:#ff0000;" onclick="window.location='/'">Clear Filters</button>
+
     </form>
 
     <div th:each="product : ${products}"

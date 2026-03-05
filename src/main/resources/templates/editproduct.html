@@ -2,85 +2,134 @@
 <html>
 <head>
     <title>Edit Product</title>
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h2 { margin-bottom: 15px; }
-        input { display: block; margin-bottom: 10px; padding: 6px; width: 250px; }
-        button { margin-top: 10px; padding: 6px 12px; background-color: #333; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #555; }
-        .delete-btn { background-color: #b02a2a; margin-left: 0px; }
-        .delete-btn:hover { background-color: #8b1f1f; }
-        a { display: inline-block; margin-top: 15px; text-decoration: none; color: #333; }
-        a:hover { text-decoration: underline; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            display: flex;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 6px;
+            width: 100%;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .delete-btn {
+            background-color: #b02a2a;
+        }
+
+        .delete-btn:hover {
+            background-color: #8b1f1f;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
 
         nav {
             margin-bottom: 20px;
         }
 
         nav a button {
-            padding: 6px 12px;
             margin-right: 5px;
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        nav a button:hover {
-            background-color: #555;
         }
     </style>
 </head>
+
 <body>
 
-<nav>
-    <a href="/admin/products"><button>Products</button></a>
-    <a href="/admin/customerorders"><button>Orders</button></a>
-    <a href="/admin/products/new"><button>Add Product</button></a>
-    <a href="/login">
-        <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
-    </a>
-</nav>
+<div class="container">
 
-<h2>Edit Product</h2>
+    <nav>
+        <a href="/admin/products"><button>Products</button></a>
+        <a href="/admin/customerorders"><button>Orders</button></a>
+        <a href="/admin/products/new"><button>Add Product</button></a>
+        <a href="/login">
+            <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
+        </a>
+    </nav>
 
-<form th:action="@{/admin/products/save}" th:object="${product}" method="post">
+    <h2>Edit Product</h2>
 
-    <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/admin/products/save}" th:object="${product}" method="post">
 
-    Name:
-    <input type="text" th:field="*{name}" required>
+        <input type="hidden" th:field="*{id}" />
 
-    Price:
-    <input type="number" th:field="*{price}" required>
+        Name:
+        <input type="text" th:field="*{name}" required>
 
-    Case Size:
-    <input type="number" th:field="*{caseSize}" required>
+        Price:
+        <input type="number" th:field="*{price}" min="0" required>
 
-    Type:
-    <input type="text" th:field="*{type}" required>
+        Case Size:
+        <input type="number" th:field="*{caseSize}" min="0" required>
 
-    Width:
-    <input type="number" th:field="*{width}" required>
+        Type:
+        <input type="text" th:field="*{type}" required>
 
-    Material:
-    <input type="text" th:field="*{material}" required>
+        Width:
+        <input type="number" th:field="*{width}" min="0" required>
 
-    Image URL:
-    <input type="text" th:field="*{img}" required>
+        Material:
+        <input type="text" th:field="*{material}" required>
 
-    Description:
-    <input type="text" th:field="*{description}" required>
+        Image URL:
+        <input type="text" th:field="*{img}" required>
 
-    <button type="submit">Update</button>
-</form>
+        Description:
+        <input type="text" th:field="*{description}" required>
 
-<form th:action="@{/admin/deleteproduct/{id}(id=${product.id})}" method="post" style="display:inline;">
-    <button type="submit" class="delete-btn">Hide product</button>
-</form>
+        <button type="submit">Update</button>
+    </form>
 
-<br>
-<a href="/admin/products">Back to Products</a>
+    <form th:action="@{/admin/deleteproduct/{id}(id=${product.id})}" method="post">
+        <button type="submit" class="delete-btn">Hide Product</button>
+    </form>
+
+    <br>
+    <a href="/admin/products">Back to Products</a>
+
+</div>
 
 </body>
 </html>
