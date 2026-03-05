@@ -7,26 +7,40 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
         }
 
         form {
             max-width: 300px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
         input {
             display: block;
             margin-bottom: 10px;
-            padding: 6px;
+            padding: 8px;
             width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
 
         button {
-            padding: 6px 12px;
+            padding: 8px 16px;
             background-color: #333;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
         }
 
         button:hover {
@@ -41,14 +55,23 @@
         a:hover {
             text-decoration: underline;
         }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-top: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
 
-<h2>Register</h2>
-
 <form th:action="@{/register}" method="post">
+    <h2>Register</h2>
 
     <input type="hidden" name="admin" th:value="${isAdmin}" />
 
@@ -61,7 +84,6 @@
     <button type="submit">Create Account</button>
 
     <p>Already have an account? <a href="/login">Log in</a></p>
-
 </form>
 
 </body>

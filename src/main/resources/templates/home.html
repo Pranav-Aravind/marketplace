@@ -37,6 +37,12 @@
             width: 100%;
         }
 
+        .filter {
+            background-color: #333;
+            color: white;
+            border: none;
+        }
+
         .product-card {
             border: 1px solid #ccc;
             width: 200px;
@@ -60,25 +66,42 @@
 </nav>
 
 <div th:if="${user != null}">
-    <h3>Hello Customer <span th:text="${user.username}"></span></h3>
+    <h3>Hello <span th:text="${user.username}"></span></h3>
 </div>
 
 <h2>Products</h2>
 
 <div>
 
-    <div th:each="product : ${products}" class="product-card">
+    <form method="get" action="/" style="margin-bottom:20px;">
+        <label>Type:</label>
+        <select name="type">
+            <option value="">All Types</option>
+            <option th:each="t : ${types}"
+                    th:value="${t}"
+                    th:text="${t}"
+                    th:selected="${t == param.type}">
+            </option>
+        </select>
+
+        <label>Min Price:</label>
+        <input type="number" name="minPrice" step="10" min="0" th:value="${param.minPrice}" />
+
+        <label>Max Price:</label>
+        <input type="number" name="maxPrice" step="10" min="0" th:value="${param.maxPrice}" />
+
+        <button type="submit" class="filter">Filter</button>
+    </form>
+
+    <div th:each="product : ${products}"
+         class="product-card"
+         th:onclick="|window.location='@{/productdetails/{id}(id=${product.id})}'|"
+         style="border:1px solid black; width:200px; padding:10px; margin:10px; display:inline-block; text-align:center; cursor:pointer;">
 
         <img th:src="${product.img}" width="150" height="180"><br><br>
 
         <b th:text="${product.name}">Product Name</b><br>
-
         $<span th:text="${product.price}">0</span><br><br>
-
-        <a th:href="@{/productdetails/{id}(id=${product.id})}">
-            <button class="btn">View Product</button>
-        </a>
-
     </div>
 
 </div>

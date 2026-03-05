@@ -7,44 +7,75 @@
         body {
             font-family: Arial, sans-serif;
             margin: 40px;
+            display: flex;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
 
         h2 {
             margin-bottom: 15px;
+            text-align: center;
         }
 
         img {
-            margin-bottom: 15px;
+            display: block;
+            margin: 0 auto 15px auto;
+            max-width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
         }
 
         nav {
             margin-bottom: 20px;
+            text-align: center;
         }
 
         nav a button {
             padding: 6px 12px;
-            margin-right: 5px;
+            margin: 5px;
             background-color: #333;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         nav a button:hover {
             background-color: #555;
         }
 
+        .product-info {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            background-color: #fafafa;
+        }
+
         p {
-            margin: 5px 0;
+            margin: 8px 0;
+            line-height: 1.4;
         }
 
         button {
             margin-top: 10px;
-            padding: 6px 12px;
+            padding: 8px 16px;
             background-color: #333;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         button:hover {
@@ -65,32 +96,38 @@
 </head>
 <body>
 
-<nav>
-    <a href="/"><button>Home</button></a>
-    <a href="/cart"><button>Cart</button></a>
-    <a href="/orderhistory"><button>Order History</button></a>
-    <a href="/login">
-        <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
-    </a>
-</nav>
+<div class="container">
 
-<h2 th:text="${product.name}">Product Name</h2>
+    <nav>
+        <a href="/"><button>Home</button></a>
+        <a href="/cart"><button>Cart</button></a>
+        <a href="/orderhistory"><button>Order History</button></a>
+        <a href="/login">
+            <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
+        </a>
+    </nav>
 
-<img th:src="${product.img}" width="200">
+    <h2 th:text="${product.name}">Product Name</h2>
 
-<p><strong>Price:</strong> $<span th:text="${product.price}"></span></p>
-<p><strong>Case Size:</strong> <span th:text="${product.caseSize}"></span> mm</p>
-<p><strong>Type:</strong> <span th:text="${product.type}"></span></p>
-<p><strong>Width:</strong> <span th:text="${product.width}"></span> mm</p>
-<p><strong>Material:</strong> <span th:text="${product.material}"></span></p>
-<p><strong>Description:</strong> <span th:text="${product.description}"></span></p>
+    <img th:src="${product.img}" width="200">
 
-<form th:action="@{/cart}" method="post">
-    <input type="hidden" name="productId" th:value="${product.id}">
-    <button type="submit">Add to cart</button>
-</form>
+    <div class="product-info">
+        <p><strong>Price:</strong> $<span th:text="${product.price}"></span></p>
+        <p><strong>Case Size:</strong> <span th:text="${product.caseSize}"></span> mm</p>
+        <p><strong>Type:</strong> <span th:text="${product.type}"></span></p>
+        <p><strong>Width:</strong> <span th:text="${product.width}"></span> mm</p>
+        <p><strong>Material:</strong> <span th:text="${product.material}"></span></p>
+        <p><strong>Description:</strong> <span th:text="${product.description}"></span></p>
 
-<a href="/">Back to Products</a>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="productId" th:value="${product.id}">
+            <button type="submit">Purchase</button>
+        </form>
+    </div>
+
+    <a href="/">Back to Products</a>
+
+</div>
 
 </body>
 </html>
