@@ -27,7 +27,7 @@ public class HomeController {
             user = (User) session.getAttribute("user");
         }
         model.addAttribute("user", user);
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("products", productRepository.findByActiveTrue());
 
         return "home";
     }   

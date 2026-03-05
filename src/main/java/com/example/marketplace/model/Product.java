@@ -12,13 +12,12 @@ public class Product {
     private String name;
     private int price;
     private String img;
-
     private int caseSize;
     private String type;
     private int width;
     private String material;
-
     private String description;
+    private boolean active = true;
 
     // ID
     public int getId() {
@@ -99,5 +98,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    // Active
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

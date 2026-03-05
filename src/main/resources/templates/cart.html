@@ -14,6 +14,23 @@
             margin-bottom: 20px;
         }
 
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a button {
+            padding: 6px 12px;
+            margin-right: 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav a button:hover {
+            background-color: #555;
+        }
+
         .cart-card {
             border: 1px solid #ccc;
             width: 250px;
@@ -49,6 +66,15 @@
 
 <body>
 
+<nav>
+    <a href="/"><button>Home</button></a>
+    <a href="/cart"><button>Cart</button></a>
+    <a href="/orderhistory"><button>Order History</button></a>
+    <a href="/login">
+        <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
+    </a>
+</nav>
+
 <h2>Your Cart</h2>
 
 <div th:if="${#lists.isEmpty(cartItems)}">
@@ -61,14 +87,48 @@
 
     <b th:text="${order.product.name}">Product Name</b><br>
 
-    <p>Quantity: <span th:text="${order.quantity}"></span></p>
-    <p>Price: $<span th:text="${order.price}"></span></p>
+    <p>
+        Quantity:
+        <span th:text="${order.quantity}"></span>
+    </p>
 
-    <form th:action="@{/orderhistory}" method="post">
-        <button type="submit">Place Order</button>
+    <form th:action="@{/cart/increase/{id}(id=${order.id})}" method="post">
+        <button type="submit">+</button>
+    </form>
+
+    <form th:action="@{/cart/decrease/{id}(id=${order.id})}" method="post">
+        <button type="submit">-</button>
+    </form>
+
+    <p>
+        Price per item: $
+        <span th:text="${order.price}"></span>
+    </p>
+
+    <p>
+        Total Price: $
+        <span th:text="${order.price * order.quantity}"></span>
+    </p>
+
+    <form th:action="@{/cart/remove/{id}(id=${order.id})}" method="post">
+        <button type="submit">Remove</button>
     </form>
 
 </div>
+
+<br><br>
+
+<h3>Total: $<span th:text="${total}"></span></h3>
+
+<form th:if="${!#lists.isEmpty(cartItems)}"
+      th:action="@{/cart/checkout}"
+      method="post">
+
+    <button type="submit">Place Order</button>
+
+</form>
+
+
 
 </body>
 </html>

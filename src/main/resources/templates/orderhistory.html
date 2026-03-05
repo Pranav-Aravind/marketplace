@@ -14,6 +14,23 @@
             margin-bottom: 20px;
         }
 
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a button {
+            padding: 6px 12px;
+            margin-right: 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav a button:hover {
+            background-color: #555;
+        }
+
         .order-card {
             border: 1px solid #ccc;
             width: 250px;
@@ -38,6 +55,15 @@
     </style>
 </head>
 <body>
+
+<nav>
+    <a href="/"><button>Home</button></a>
+    <a href="/cart"><button>Cart</button></a>
+    <a href="/orderhistory"><button>Order History</button></a>
+    <a href="/login">
+        <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
+    </a>
+</nav>
 
 <h2>Order History</h2>
 

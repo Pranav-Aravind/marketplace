@@ -39,7 +39,7 @@ public class AdminController {
         if (user == null) return "redirect:/login";
 
         model.addAttribute("user", user);
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("products", productRepository.findByActiveTrue());
 
         return "admindashboard";
     }
@@ -76,7 +76,11 @@ public class AdminController {
         User user = getAdmin(request);
         if (user == null) return "redirect:/login";
 
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id).orElse(null);
+        if (product != null) {
+            product.setActive(false);
+            productRepository.save(product);
+        }
 
         return "redirect:/admin/products";
     }

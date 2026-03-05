@@ -51,9 +51,12 @@
 <body>
 
 <nav>
+  <a href="/admin/products"><button>Products</button></a>
   <a href="/admin/customerorders"><button>Orders</button></a>
   <a href="/admin/products/new"><button>Add Product</button></a>
-  <a href="/login"><button>Login</button></a>
+  <a href="/login">
+    <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
+  </a>
 </nav>
 
 <div th:if="${user != null}">

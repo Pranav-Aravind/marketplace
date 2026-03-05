@@ -54,11 +54,13 @@
     <a href="/"><button>Home</button></a>
     <a href="/cart"><button>Cart</button></a>
     <a href="/orderhistory"><button>Order History</button></a>
-    <a href="/login"><button>Login</button></a>
+    <a href="/login">
+        <button th:text="${user != null} ? 'Switch User' : 'Login'"></button>
+    </a>
 </nav>
 
 <div th:if="${user != null}">
-    <h3>Hello <span th:text="${user.username}"></span></h3>
+    <h3>Hello Customer <span th:text="${user.username}"></span></h3>
 </div>
 
 <h2>Products</h2>
